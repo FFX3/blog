@@ -1,8 +1,10 @@
 export async function load({ params } : any) {
 	const { slug } = params;
 
-	const post = await import(/* @vite-ignore */ `../../../_entries/notes/${slug}.md`);
-    console.log(post)
+    let post
+    if(slug){
+	    post = await import(/* @vite-ignore */ `../../../_entries/${!!slug ? slug : 'index'}.md`);
+    }
 	const { default: page, metadata } = post;
 
 	if (!page) {
@@ -11,5 +13,5 @@ export async function load({ params } : any) {
 		};
 	}
 
-	return { page, metadata };
+	return { page, metadata, slug };
 }
