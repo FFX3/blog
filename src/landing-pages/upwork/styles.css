@@ -18,11 +18,11 @@ body {
     min-height: 100vh;
 
     /*  this is where the magic happens:  */
-    background-attachment: fixed;
+    /*background-attachment: fixed;
 
     background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/assets/background.jpg);
     background-position: center;
-    background-size: cover;
+    background-size: cover; */
     row-gap: 4rem;
 
     text-align: left;
@@ -270,6 +270,19 @@ main > * {
     }
 }
 
+#background_wrap {
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/assets/background.jpg);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
 @media (max-width: 1260px) {
 
     #canvas-container {
@@ -277,7 +290,7 @@ main > * {
         top: 0;
         width: 100vw;
         height: 100vh;
-        display: flex;
+        display: none;
         justify-content: center;
         align-items: center;
         z-index: -1;
@@ -294,7 +307,18 @@ main > * {
 
     #hero-section {
         grid-template-columns: 1fr;
+        margin-top: 20px
     }
+
+    #problem-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        place-content: center;
+        height: unset;
+        gap: 40px;
+    }
+
 
     #solution-1, #solution-2, #solution-3 {
         display: flex;
@@ -304,11 +328,31 @@ main > * {
     }
 
     #expertise-list {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
     }
 
     .left-3d-light, .right-3d-light, .left-3d, .right-3d {
         transform: revert;
+    }
+
+    h2, h3 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    p {
+        font-size: 18px;
+    }
+
+    .headline {
+        font-size: 32px;
+
+    }
+
+    main > * {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin: auto;
     }
 
 }
