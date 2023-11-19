@@ -1,6 +1,5 @@
-<main class="container">
-    <h1>Home page</h1>
+<script>
+    import Page from '../landing-pages/upwork/Index.svelte'
+</script>
 
-    <a href="/blog/archive">archive</a>
-    <button>yo</button>
-</main>
+<Page/>

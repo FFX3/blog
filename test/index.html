@@ -1,0 +1,744 @@
+<html><head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+            p {
+                font-size: 22px;
+            }
+
+            h2, h3 {
+                font-size: 34px;
+                text-align: center;
+            }
+
+            .white-text {
+                color: white;
+            }
+
+            body {
+                color: #222;
+                font-family: inter;
+                margin: 0px;
+                min-height: 100vh;
+
+                /*  this is where the magic happens:  */
+                background-attachment: fixed;
+
+                background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(assets/background.jpg);
+                background-position: center;
+                background-size: cover;
+                row-gap: 4rem;
+
+                text-align: left;
+            }
+
+            html {
+                scroll-snap-type: y mandatory;
+            }
+
+
+            body > main > * {
+                scroll-snap-align: start;
+                scroll-snap-stop: always;
+            }
+
+            main {
+            }
+
+            main > * {
+                max-width: 1440px;
+                padding-left: 50px;
+                padding-right: 50px;
+                margin: auto;
+            }
+
+            /* hero section */
+            #hero-section {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                place-content: center;
+                justify-items: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .phone-space {
+                background-color: none;
+                width: 750px;
+                height: 750px;
+            }
+
+
+            .lean-on-hover {
+                transform: perspective(3000px) rotateY(15deg);
+                transition: transform 1s ease 0s;
+                &:hover {
+                    transform: perspective(1500px) rotateY(0deg);
+                }
+            }
+
+            .left-3d-light {
+                transform: perspective(1500px) rotateY(5deg);
+                transition: transform 1s ease 0s;
+                &:hover {
+                    transform: perspective(3000px) rotateY(3deg);
+                }
+            }
+
+            .right-3d-light {
+                transform: perspective(1500px) rotateY(-5deg);
+                transition: transform 1s ease 0s;
+                &:hover {
+                    transform: perspective(3000px) rotateY(-3deg);
+                }
+            }
+
+            .left-3d {
+                transform: perspective(1500px) rotateY(15deg);
+                transition: transform 1s ease 0s;
+                &:hover {
+                    transform: perspective(3000px) rotateY(5deg);
+                }
+            }
+
+            .right-3d {
+                transform: perspective(1500px) rotateY(-15deg);
+                transition: transform 1s ease 0s;
+                &:hover {
+                    transform: perspective(3000px) rotateY(-5deg);
+                }
+            }
+
+            .glass-card {
+                display: flex;
+                flex-direction: column;
+
+                padding: 35px;
+
+                border: 1px solid rgba(255, 255, 255, .25);
+                border-radius: 20px;
+                background-color: rgba(255, 255, 255, 0.45);
+                box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+
+                backdrop-filter: blur(15px);
+                border-radius: 1rem;
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+            }
+
+            #headline-section {
+                max-width: 600px;
+                text-align: left;
+            }
+
+            .headline {
+                font-size: 67px;
+            }
+
+            /* problems section */
+
+            #problems, #skill-sets {
+                padding-top: 150px;
+                padding-bottom: 150px;
+                position: relative;
+                text-align: center;
+            }
+
+            #problems__banner {
+                position: relative;
+                z-index: 2;
+            }
+
+            #problem-list {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                justify-items: center;
+                place-content: center;
+                height: 400px;
+                gap: 40px;
+            }
+
+            #expertise-list {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                justify-items: center;
+                place-content: center;
+                gap: 40px;
+                text-align: left;
+            }
+
+            #problems .phone-space, #skill-sets .phone-space {
+                position: absolute;
+                z-index: 1;
+                top: 100px;
+                left: 399px;
+            }
+
+            /* solutions */
+
+            #solution-1, #solution-2, #solution-3 {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                place-content: center;
+                justify-items: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .solution {
+                background-color: blue;
+                grid-template-columns: 1fr;
+                justify-items: center;
+                place-content: center;
+                width: 500px;
+                position: relative;
+
+                background: linear-gradient(49deg, #2d4de0 0, #9f71f0 30%, #fc6277 58%, #f8ef6f 95%);
+                border-radius: 12px;
+            }
+
+            #canvas-container {
+                position: absolute;
+            }
+
+            #canvas3d {
+                position: absolute;
+            }
+
+            .card-container {
+                margin: 5px;
+
+                padding: 50px 40px;
+
+                background-color: #222222;
+                color: #ffffff;
+
+                border-radius: 12px;
+
+                transition: 0.2s ease;
+            }
+
+            .solution:hover .card-container {
+                border-radius: 10px;
+                top: 3px;
+                bottom: 3px;
+                left: 3px;
+                right: 3px;
+            }
+
+            .button-anon-pen {
+                width: 300px;
+                line-height: 3em;
+                background-image: linear-gradient(115deg, #4fcf70, #fad648, #a767e5, #12bcfe, #44ce7b);
+                text-align: center;
+                margin: 0 auto;
+                position: relative;
+                color: #fff;
+                text-decoration: none;
+                display: block;
+                font-weight: normal;
+                border-radius: 6px;
+                overflow: hidden;
+            }
+
+            .button-anon-pen:hover {
+                -webkit-animation: play 1.6s ease-in infinite;
+            }
+
+            .button-anon-pen span {
+                padding: 25px;
+                font-size: 34px;
+                display: block;
+                font-weight: 700;
+                margin: 3px;
+                background: #222;
+                border-radius: 3px;
+            }
+
+            @-webkit-keyframes play {
+                0% {
+                    background-position: 0px;
+                }
+                20% {
+                    background-position: -110px;
+                }
+                35% {
+                    background-position: -180px;
+                }
+                50% {
+                    background-position: -210px;
+                }
+                80% {
+                    background-position: -350px;
+                }
+                100% {
+                    background-position: -390px;
+                }
+            }
+
+            @media (max-width: 1260px) {
+
+                #canvas-container {
+                    position: fixed;
+                    top: 0;
+                    width: 100vw;
+                    height: 100vh;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: -1;
+                }
+
+                #canvas3d {
+                    opacity: 0;
+                }
+
+                .phone-space {
+                    width: 0px;
+                    height: 0px;
+                }
+
+                #hero-section {
+                    grid-template-columns: 1fr;
+                }
+
+                #solution-1, #solution-2, #solution-3 {
+                    display: flex;
+                    height: unset;
+                    margin-top: 80px;
+                    margin-bottom: 80px;
+                }
+                
+                #expertise-list {
+                    grid-template-columns: 1fr 1fr;
+                }
+
+                .left-3d-light, .right-3d-light, .left-3d, .right-3d {
+                    transform: revert;
+                }
+
+            }
+        </style>
+</head>
+<body style="">
+<div style="display: contents">
+<div id="canvas-container">
+<canvas id="canvas3d" style="top: -110.5px; left: 930px; width: 750px; height: 750px;" data-engine="three.js r149" width="750" height="750">
+</canvas>
+</div>
+<main>
+<div id="hero-section">
+<div id="headline-section" class="glass-card left-3d">
+<h1 class="headline">Bring your vision to life. Solve your business problem</h1>
+</div>
+<div id="phone-space-1" class="phone-space">
+</div>
+</div>
+<div id="problems">
+<div id="phone-space-2" class="phone-space">
+</div>
+<div class="glass-card" id="problems__banner">
+<h2 class="headline">It's Hard To Find Reliable Developers</h2>
+<div id="problem-list">
+<div>
+<h2>Low Quality Work</h2>
+<p>
+Some developers cut corners to look good in the short-term
+but expose their clients to problems in the future
+</p>
+</div>
+<div>
+<h2>Bad Communicaton</h2>
+<p>
+Instructions have to be repeated.
+Details are forgotten,
+you keep getting blamed for not being clear enough.
+It shouldn’t be this hard.
+</p>
+</div>
+<div>
+<h2>Uncertain Process</h2>
+<p>
+Deadlines keep getting passed, and nothing changes.
+This leads to frustration and a failed project.
+</p>
+</div>
+</div>
+</div>
+</div>
+<h2 class="headline white-text">Getting Software built Should Be Simple</h2>
+<div id="solution-1">
+<div id="phone-space-3" class="phone-space">
+</div>
+<div class="solution right-3d">
+<div class="card-container right-3d-light">
+<h2>Clear Communication</h2>
+<p>
+We understand that as the experts it's our job to help you explain your vision clearly.
+We do this by asking questions, taking notes and showing examples.
+</p>
+</div>
+</div>
+</div>
+<div id="solution-2">
+<div class="solution left-3d">
+<div class="card-container left-3d-light">
+<h2>No Details Skipped</h2>
+<p>
+Corners are never cut without a very specific reason and deliberation with you.
+We'll inform your of the trade-offs and give your our expert opinion to maximize the
+impact our solution has on your goals.
+<br>
+<br>
+We understand that as the experts our job is to make the process simple and protect you
+from the problems you don't even know about.
+</p>
+</div>
+</div>
+<div id="phone-space-4" class="phone-space">
+</div>
+</div>
+<div id="solution-3">
+<div id="phone-space-5" class="phone-space">
+</div>
+<div class="solution right-3d">
+<div class="card-container right-3d-light">
+<h2>Step-By-Step Process</h2>
+<p>
+Running a business is already stressful enough, we don't want to add to this.
+That's why we make the process as straight forward and predictable as possible.
+<br>
+<br>
+This makes it easy to budget and understand where your investment is going
+<br>
+<br>
+Projects are broken up into stages allowing you
+to clearly understand how close the project is to completion.
+</p>
+</div>
+</div>
+</div>
+<div id="skill-sets">
+<div id="phone-space-6" class="phone-space">
+</div>
+<div>
+<h2 class="headline white-text">Our areas of expertise</h2>
+<div id="expertise-list">
+<div class="glass-card">
+<h2>Wordpress/PHP</h2>
+<p>
+Wether you need a simple website or an enterprise
+ready CMS, we've got you covered.
+</p>
+</div>
+<div class="glass-card">
+<h2>React Native</h2>
+<p>
+We've built multiple mobile apps from the ground up using ReactJS,
+Yours could be the next one.
+</p>
+</div>
+<div class="glass-card">
+<h2>ReactJS/Svelte</h2>
+<p>
+Javascript based front-end applications is our bread and butter.
+Your imagination (and budget) is the limit.
+</p>
+</div>
+<div class="glass-card">
+<h2>Rust/WASM</h2>
+<p>
+Users are demanding more and more from our webapps.
+We can make websites function like desktop apps using web assembly.
+</p>
+</div>
+<div class="glass-card">
+<h2>Postgres/MySql</h2>
+<p>
+Rarely a project doesn't need a database.
+That's why we keep our SQL skills sharp.
+</p>
+</div>
+<div class="glass-card">
+<h2>Rust &amp; JavaScript for Backend</h2>
+<p>
+This is the glue that ties most projects together.
+Where complex business logic is stored.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div style="height: 100vh; display: flex;">
+<div class="" style="max-width: 900px; margin: auto;">
+<h2 class="headline white-text" style="margin: auto; margin-bottom: 100px;">Make your vision a reality</h2>
+<a class="lean-on-hover button-anon-pen" href="https://www.upwork.com/freelancers/~0135572cbf7cb54c48"><span>Contact us on UpWork</span></a>
+<div>
+
+</div>
+</div></div></main>
+<script type="importmap">
+          {
+            "imports": {
+              "@splinetool/runtime": "https://unpkg.com/@splinetool/runtime@0.9.455/build/runtime.js"
+            }
+          }
+
+        </script>
+<script type="module">
+import { Application } from '@splinetool/runtime';
+
+const phoneSpaces = [
+    document.getElementById('phone-space-1').getBoundingClientRect(),
+    document.getElementById('phone-space-2').getBoundingClientRect(),
+    document.getElementById('phone-space-3').getBoundingClientRect(),
+    document.getElementById('phone-space-4').getBoundingClientRect(),
+    document.getElementById('phone-space-5').getBoundingClientRect(),
+]
+
+
+const canvas = document.getElementById('canvas3d');
+
+
+function getCanvasPosition(){
+    const { x, y } = canvas.getBoundingClientRect()
+    return { x: x + window.scrollX, y: y + window.scrollY }
+}
+
+console.log(getCanvasPosition(), 'debug')
+
+function moveCanvasToElement(elementId, duration=3){
+    const newPosition = document.getElementById(elementId).getBoundingClientRect()
+    const { x: offSetX, y: offSetY } = getCanvasPosition()
+    gsap.to(canvas, { 
+        y: newPosition.y + window.scrollY - offSetY,
+        x: newPosition.x + window.scrollX - offSetX,
+        duration,
+    })
+}
+
+function moveCanvasToElementGsapToValues(elementId){
+    const newPosition = document.getElementById(elementId).getBoundingClientRect()
+    if(elementId == "phone-space-7")
+        console.log(newPosition)
+    const { x: offSetX, y: offSetY } = getCanvasPosition()
+    return { 
+        y: newPosition.y + window.scrollY - offSetY,
+        x: newPosition.x + window.scrollX - offSetX,
+    }
+}
+
+const app = new Application(canvas);
+console.log(window.matchMedia('(min-width: 1260px)').matches)
+if(window.matchMedia('(min-width: 1260px)').matches){
+
+canvas.style.top = `${phoneSpaces[0].y + window.scrollY}px`
+canvas.style.left = `${phoneSpaces[0].x + window.scrollX}px`
+
+app.load('https://prod.spline.design/Rtz0eyKcgVORYn-Y/scene.splinecode')
+    .then(()=>{
+        const phone = app.findObjectByName("phone")
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#hero-section",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1,
+            }
+        })
+        .to(canvas, moveCanvasToElementGsapToValues('phone-space-2'), 0)
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#hero-section",
+                start: "center top",
+                end: "bottom top",
+                onEnter: ()=>{
+                    app.emitEvent("keyUp", "phone")
+                },
+                onLeaveBack: ()=>{
+                    app.emitEvent("mouseDown", "phone")
+                }
+            }
+        })
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#problems",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1,
+            }
+        })
+        .to(canvas, moveCanvasToElementGsapToValues('phone-space-3'), 0)
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#problems",
+                start: "center top",
+                end: "bottom top",
+                onEnter: ()=>{
+                    app.emitEvent("mouseUp", "phone")
+                },
+                onLeaveBack: ()=>{
+                    app.emitEvent("keyUp", "phone")
+                }
+            }
+        })
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#solution-1",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1,
+            }
+        })
+        .to(canvas, moveCanvasToElementGsapToValues('phone-space-4'), 0)
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#solution-1",
+                start: "center top",
+                end: "bottom top",
+                onEnter: ()=>{
+                    app.emitEvent("mouseDown", "phone")
+                },
+                onLeaveBack: ()=>{
+                    app.emitEvent("mouseUp", "phone")
+                },
+            }
+        })
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#solution-2",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1,
+            }
+        })
+        .to(canvas, moveCanvasToElementGsapToValues('phone-space-5'), 0)
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#solution-2",
+                start: "center top",
+                end: "bottom top",
+                onEnter: ()=>{
+                    app.emitEvent("mouseUp", "phone")
+                },
+                onLeaveBack: ()=>{
+                    app.emitEvent("mouseDown", "phone")
+                },
+            }
+        })
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#solution-3",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1,
+            }
+        })
+        .to(canvas, moveCanvasToElementGsapToValues('phone-space-6'), 0)
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#solution-3",
+                start: "center top",
+                end: "bottom top",
+                onEnter: ()=>{
+                    app.emitEvent("keyUp", "phone")
+                },
+                onLeaveBack: ()=>{
+                    app.emitEvent("mouseUp", "phone")
+                }
+            }
+        })
+        /*
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#skill-sets",
+                start: "center top",
+                end: "bottom top",
+                scrub: 1,
+                onEnter: ()=>{
+                    app.emitEvent("keyDown", "phone")
+                },
+                onLeaveBack: ()=>{
+                    app.emitEvent("keyUp", "phone")
+                }
+            }
+        })
+        .to(canvas, {
+            ...moveCanvasToElementGsapToValues('phone-space-7'),
+            width: 2000, 
+            height: 1000, 
+        }, 0)
+        */
+    })
+
+} else {
+if(false)
+app.load('https://prod.spline.design/Rtz0eyKcgVORYn-Y/scene.splinecode')
+    .then(()=>{
+        const phone = app.findObjectByName("phone")
+
+        canvas.style.width = '2250px'
+        canvas.style.height = '2250px'
+        canvas.style.opacity = '1'
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#hero-section",
+                start: "center top",
+                end: "bottom top",
+                onEnter: ()=>{
+                    app.emitEvent("keyUp", "phone")
+                },
+                onLeaveBack: ()=>{
+                    app.emitEvent("mouseDown", "phone")
+                }
+            }
+        })
+
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#problems",
+                start: "center top",
+                end: "bottom top",
+                onEnter: ()=>{
+                    app.emitEvent("mouseUp", "phone")
+                },
+                onLeaveBack: ()=>{
+                    app.emitEvent("keyUp", "phone")
+                }
+            }
+        })
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#solution-3",
+                start: "center top",
+                end: "bottom top",
+                onEnter: ()=>{
+                    app.emitEvent("keyUp", "phone")
+                },
+                onLeaveBack: ()=>{
+                    app.emitEvent("mouseUp", "phone")
+                }
+            }
+        })
+    })
+}
+</script>
+
+
+</div>
+</body></html>
