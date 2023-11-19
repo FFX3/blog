@@ -3,3 +3,4 @@
 </script>
 
 <Page/>
+<a style="display: none;" href="blog/archive">temp</a>
