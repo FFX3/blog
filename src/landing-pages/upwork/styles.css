@@ -329,7 +329,7 @@ main > * {
 
     #hero-section {
         grid-template-columns: 1fr;
-        margin-top: 20px
+        height: 700px;
     }
 
     #problem-list {
