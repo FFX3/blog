@@ -2,6 +2,7 @@ import { Application } from '@splinetool/runtime';
 
 const mobileSplineScene = '/assets/spline-mobile/scene.splinecode'
 const desktopScene = '/assets/spline-desktop/scene.splinecode'
+//const desktopScene = 'https://prod.spline.design/xhMT7Nqv6-4WEUmf/scene.splinecode'
 
 export function run() {
 
@@ -49,9 +50,11 @@ export function run() {
                         end: "bottom top",
                         onEnter: ()=>{
                             app.emitEvent("keyUp", "phone")
+                            canvas?.click()
                         },
                         onLeaveBack: ()=>{
                             app.emitEvent("mouseDown", "phone")
+                            app.emitEvent("mouseDown", "Screen")
                         }
                     }
                 })
@@ -64,8 +67,11 @@ export function run() {
                         end: "bottom top",
                         onEnter: ()=>{
                             app.emitEvent("mouseUp", "phone")
+                            app.emitEvent("mouseUp", "Screen")
+                            canvas?.click()
                         },
                         onLeaveBack: ()=>{
+                            app.emitEvent("keyUp", "phone")
                             app.emitEvent("keyUp", "phone")
                         }
                     }
@@ -78,10 +84,13 @@ export function run() {
                         start: "center top",
                         end: "bottom top",
                         onEnter: ()=>{
-                            app.emitEvent("mouseDown", "phone")
+                            app.emitEvent("keyDown", "phone")
+                            app.emitEvent("keyUp", "Screen")
+                            canvas?.click()
                         },
                         onLeaveBack: ()=>{
                             app.emitEvent("mouseUp", "phone")
+                            app.emitEvent("mouseUp", "Screen")
                         },
                     }
                 })
@@ -94,9 +103,12 @@ export function run() {
                         end: "bottom top",
                         onEnter: ()=>{
                             app.emitEvent("mouseUp", "phone")
+                            app.emitEvent("keyDown", "Screen")
+                            canvas?.click()
                         },
                         onLeaveBack: ()=>{
-                            app.emitEvent("mouseDown", "phone")
+                            app.emitEvent("keyDown", "phone")
+                            app.emitEvent("keyUp", "Screen")
                         },
                     }
                 })
@@ -109,6 +121,7 @@ export function run() {
                         end: "bottom top",
                         onEnter: ()=>{
                             app.emitEvent("keyUp", "phone")
+                            canvas?.click()
                         },
                         onLeaveBack: ()=>{
                             app.emitEvent("mouseUp", "phone")
