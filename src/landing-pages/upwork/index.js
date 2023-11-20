@@ -1,37 +1,34 @@
 import { Application } from '@splinetool/runtime';
 
 export function run() {
-    const phoneSpaces = [
-        document.getElementById('phone-space-1').getBoundingClientRect(),
-        document.getElementById('phone-space-2').getBoundingClientRect(),
-        document.getElementById('phone-space-3').getBoundingClientRect(),
-        document.getElementById('phone-space-4').getBoundingClientRect(),
-        document.getElementById('phone-space-5').getBoundingClientRect(),
-    ]
 
-
-    const canvas = document.getElementById('canvas3d');
-
-
-    function getCanvasPosition(){
-        const { x, y } = canvas.getBoundingClientRect()
-        return { x: x + window.scrollX, y: y + window.scrollY }
-    }
-
-    console.log(getCanvasPosition(), 'debug')
-
-    function moveCanvasToElementGsapToValues(elementId){
-        const newPosition = document.getElementById(elementId).getBoundingClientRect()
-        const { x: offSetX, y: offSetY } = getCanvasPosition()
-        return { 
-            y: newPosition.y + window.scrollY - offSetY,
-            x: newPosition.x + window.scrollX - offSetX,
-        }
-    }
-
-    const app = new Application(canvas);
-    console.log(window.matchMedia('(min-width: 1260px)').matches)
     if(window.matchMedia('(min-width: 1260px)').matches){
+        const phoneSpaces = [
+            document.getElementById('phone-space-1').getBoundingClientRect(),
+            document.getElementById('phone-space-2').getBoundingClientRect(),
+            document.getElementById('phone-space-3').getBoundingClientRect(),
+            document.getElementById('phone-space-4').getBoundingClientRect(),
+            document.getElementById('phone-space-5').getBoundingClientRect(),
+        ]
+
+        const canvas = document.getElementById('canvas3d');
+
+        function getCanvasPosition(){
+            const { x, y } = canvas.getBoundingClientRect()
+            return { x: x + window.scrollX, y: y + window.scrollY }
+        }
+
+        console.log(getCanvasPosition(), 'debug')
+
+        function moveCanvasToElementGsapToValues(elementId){
+            const newPosition = document.getElementById(elementId).getBoundingClientRect()
+            const { x: offSetX, y: offSetY } = getCanvasPosition()
+            return { 
+                y: newPosition.y + window.scrollY - offSetY,
+                x: newPosition.x + window.scrollX - offSetX,
+            }
+        }
+        const app = new Application(canvas);
 
         canvas.style.top = `${phoneSpaces[0].y + window.scrollY}px`
         canvas.style.left = `${phoneSpaces[0].x + window.scrollX}px`
@@ -160,6 +157,55 @@ export function run() {
                 })
             })
 
+    } else {
+        const canvas = document.getElementById('canvas3d-mobile');
+        const app = new Application(canvas);
+
+        app.load('https://prod.spline.design/ce41Zry5g0f3qMru/scene.splinecode')
+            .then(()=>{
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "#hero-section",
+                        start: "center top",
+                        end: "bottom top",
+                        onEnter: ()=>{
+                            app.emitEvent("keyUp", "phone")
+                        },
+                        onLeaveBack: ()=>{
+                            app.emitEvent("mouseDown", "phone")
+                        }
+                    }
+                })
+
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "#problems",
+                        start: "center top",
+                        end: "bottom top",
+                        onEnter: ()=>{
+                            app.emitEvent("mouseUp", "phone")
+                        },
+                        onLeaveBack: ()=>{
+                            app.emitEvent("keyUp", "phone")
+                        }
+                    }
+                })
+
+
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "#solution-3",
+                        start: "center top",
+                        end: "bottom top",
+                        onEnter: ()=>{
+                            app.emitEvent("keyUp", "phone")
+                        },
+                        onLeaveBack: ()=>{
+                            app.emitEvent("mouseUp", "phone")
+                        }
+                    }
+                })
+            })
     }
 }
 

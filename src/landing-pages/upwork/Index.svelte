@@ -20,7 +20,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&amp;display=swap" rel="stylesheet">
 </svelte:head>
-<div id="background_wrap"></div>
+<div id="background_wrap">
+<canvas id="canvas3d-mobile"data-engine="three.js r149">
+</canvas>
+</div>
 <div id="canvas-container">
 <canvas id="canvas3d" style="top: 90.5px; left: 930px; width: 750px; height: 750px; translate: none; rotate: none; scale: none;" data-engine="three.js r149" width="750" height="750">
 </canvas>
