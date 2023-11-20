@@ -1,5 +1,8 @@
 import { Application } from '@splinetool/runtime';
 
+const mobileSplineScene = '/assets/spline-mobile/scene.splinecode'
+const desktopScene = '/assets/spline-desktop/scene.splinecode'
+
 export function run() {
 
     if(window.matchMedia('(min-width: 1260px)').matches){
@@ -11,7 +14,7 @@ export function run() {
             document.getElementById('phone-space-5').getBoundingClientRect(),
         ]
 
-        const canvas = document.getElementById('canvas3d');
+        const canvas = document.getElementById('canvas3d-mobile');
 
         function getCanvasPosition(){
             const { x, y } = canvas.getBoundingClientRect()
@@ -21,6 +24,7 @@ export function run() {
         console.log(getCanvasPosition(), 'debug')
 
         function moveCanvasToElementGsapToValues(elementId){
+            return
             const newPosition = document.getElementById(elementId).getBoundingClientRect()
             const { x: offSetX, y: offSetY } = getCanvasPosition()
             return { 
@@ -35,16 +39,8 @@ export function run() {
 
 
 
-        app.load('https://prod.spline.design/Rtz0eyKcgVORYn-Y/scene.splinecode')
+        app.load(desktopScene)
             .then(()=>{
-                gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "#hero-section", start: "top top",
-                        end: "bottom top",
-                        scrub: 1,
-                    }
-                })
-                    .to(canvas, moveCanvasToElementGsapToValues('phone-space-2'), 0)
 
                 gsap.timeline({
                     scrollTrigger: {
@@ -60,15 +56,6 @@ export function run() {
                     }
                 })
 
-                gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "#problems",
-                        start: "top top",
-                        end: "bottom top",
-                        scrub: 1,
-                    }
-                })
-                    .to(canvas, moveCanvasToElementGsapToValues('phone-space-3'), 0)
 
                 gsap.timeline({
                     scrollTrigger: {
@@ -84,15 +71,6 @@ export function run() {
                     }
                 })
 
-                gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "#solution-1",
-                        start: "top top",
-                        end: "bottom top",
-                        scrub: 1,
-                    }
-                })
-                    .to(canvas, moveCanvasToElementGsapToValues('phone-space-4'), 0)
 
                 gsap.timeline({
                     scrollTrigger: {
@@ -108,15 +86,6 @@ export function run() {
                     }
                 })
 
-                gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "#solution-2",
-                        start: "top top",
-                        end: "bottom top",
-                        scrub: 1,
-                    }
-                })
-                    .to(canvas, moveCanvasToElementGsapToValues('phone-space-5'), 0)
 
                 gsap.timeline({
                     scrollTrigger: {
@@ -132,15 +101,6 @@ export function run() {
                     }
                 })
 
-                gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "#solution-3",
-                        start: "top top",
-                        end: "bottom top",
-                        scrub: 1,
-                    }
-                })
-                    .to(canvas, moveCanvasToElementGsapToValues('phone-space-6'), 0)
 
                 gsap.timeline({
                     scrollTrigger: {
@@ -161,7 +121,7 @@ export function run() {
         const canvas = document.getElementById('canvas3d-mobile');
         const app = new Application(canvas);
 
-        app.load('https://prod.spline.design/ce41Zry5g0f3qMru/scene.splinecode')
+        app.load(mobileSplineScene)
             .then(()=>{
                 gsap.timeline({
                     scrollTrigger: {

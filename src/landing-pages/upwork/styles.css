@@ -286,6 +286,17 @@ main > * {
 #canvas3d-mobile {
     display: none;
 }
+#canvas3d {
+    display: none;
+    opacity: 0;
+}
+
+#canvas3d-mobile {
+    display: unset;
+    height: 100vh;
+    width: 100wh;
+}
+
 
 @media (max-width: 1260px) {
 
