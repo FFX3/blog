@@ -18,17 +18,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&amp;display=swap" rel="stylesheet">
 </svelte:head>
 <div id="background_wrap">
-    <canvas id="canvas3d-mobile" data-engine="three.js r149"> </canvas>
-</div>
-<div id="canvas-container">
-    <canvas id="canvas3d" style="top: 90.5px; left: 930px; width: 750px; height: 750px; translate: none; rotate: none; scale: none;" data-engine="three.js r149" width="750" height="750"> </canvas>
+    <div id="canvas-container">
+        <canvas id="canvas3d-mobile" data-engine="three.js r149"> </canvas>
+    </div>
 </div>
 <main>
     <div id="hero-section">
         <div id="headline-section" class="glass-card left-3d">
             <h1 class="headline">Bring your vision to life. Solve your business problems</h1>
         </div>
-        <div id="phone-space-1" class="phone-space"></div>
+        <div id="cta-hero" style=" align-items: center; justify-content: center;">
+            <div>
+                <a class="button-anon-pen" href="https://www.upwork.com/freelancers/~0135572cbf7cb54c48"><span>Contact us on UpWork</span></a>
+            </div>
+        </div>
     </div>
     <div id="problems">
         <div id="phone-space-2" class="phone-space"></div>

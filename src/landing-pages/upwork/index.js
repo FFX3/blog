@@ -9,41 +9,38 @@ const desktopScene = '/assets/spline-desktop/scene.splinecode'
 export function run() {
 
     if(window.matchMedia('(min-width: 1260px)').matches){
-        const phoneSpaces = [
-            document.getElementById('phone-space-1').getBoundingClientRect(),
-            document.getElementById('phone-space-2').getBoundingClientRect(),
-            document.getElementById('phone-space-3').getBoundingClientRect(),
-            document.getElementById('phone-space-4').getBoundingClientRect(),
-            document.getElementById('phone-space-5').getBoundingClientRect(),
-        ]
 
         const canvas = document.getElementById('canvas3d-mobile');
+        const canvas_container = document.getElementById('canvas-container');
+        canvas_container.style.opacity = '0';
 
         const app = new Application(canvas);
-
-        canvas.style.top = `${phoneSpaces[0].y + window.scrollY}px`
-        canvas.style.left = `${phoneSpaces[0].x + window.scrollX}px`
 
 
 
         app.load(desktopScene)
             .then(()=>{
                 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-                app.emitEvent("mouseDown", "phone")
+                //app.emitEvent("mouseDown", "phone")
+
                 gsap.timeline({
                     scrollTrigger: {
                         trigger: "#hero-section",
-                        start: "center top",
+                        start: "top top",
                         end: "bottom top",
+                        scrub: 0,
                         onEnter: ()=>{
-                            app.emitEvent("keyUp", "phone")
-                            canvas?.click()
+                            //background.style.opacity='1'
+                            //app.emitEvent("keyUp", "phone")
                         },
                         onLeaveBack: ()=>{
-                            app.emitEvent("mouseDown", "phone")
-                            app.emitEvent("mouseDown", "Screen")
+                            //background.style.opacity = '0';
+                            //app.emitEvent("mouseDown", "phone")
+                            //app.emitEvent("mouseDown", "Screen")
                         }
                     }
+                }).to("#canvas-container", {
+                    opacity: 1
                 })
 
 
