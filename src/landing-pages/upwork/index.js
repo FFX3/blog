@@ -1,5 +1,6 @@
 import { Application } from '@splinetool/runtime';
 
+
 const mobileSplineScene = '/assets/spline-mobile/scene.splinecode'
 const desktopScene = '/assets/spline-desktop/scene.splinecode'
 
@@ -27,6 +28,7 @@ export function run() {
 
         app.load(desktopScene)
             .then(()=>{
+                gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
                 app.emitEvent("mouseDown", "phone")
                 gsap.timeline({
                     scrollTrigger: {
