@@ -2,6 +2,7 @@ import { Application } from '@splinetool/runtime';
 
 const mobileSplineScene = '/assets/spline-mobile/scene.splinecode'
 const desktopScene = '/assets/spline-desktop/scene.splinecode'
+
 //const desktopScene = 'https://prod.spline.design/xhMT7Nqv6-4WEUmf/scene.splinecode'
 
 export function run() {
@@ -17,22 +18,6 @@ export function run() {
 
         const canvas = document.getElementById('canvas3d-mobile');
 
-        function getCanvasPosition(){
-            const { x, y } = canvas.getBoundingClientRect()
-            return { x: x + window.scrollX, y: y + window.scrollY }
-        }
-
-        console.log(getCanvasPosition(), 'debug')
-
-        function moveCanvasToElementGsapToValues(elementId){
-            return
-            const newPosition = document.getElementById(elementId).getBoundingClientRect()
-            const { x: offSetX, y: offSetY } = getCanvasPosition()
-            return { 
-                y: newPosition.y + window.scrollY - offSetY,
-                x: newPosition.x + window.scrollX - offSetX,
-            }
-        }
         const app = new Application(canvas);
 
         canvas.style.top = `${phoneSpaces[0].y + window.scrollY}px`
@@ -42,7 +27,7 @@ export function run() {
 
         app.load(desktopScene)
             .then(()=>{
-
+                app.emitEvent("mouseDown", "phone")
                 gsap.timeline({
                     scrollTrigger: {
                         trigger: "#hero-section",
@@ -125,6 +110,67 @@ export function run() {
                         },
                         onLeaveBack: ()=>{
                             app.emitEvent("mouseUp", "phone")
+                        }
+                    }
+                })
+
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "#cta",
+                        //start: "top center",
+                        //end: "bottom top",
+                        onEnter: ()=>{
+                            app.emitEvent("mouseDown", "Camera")
+                            console.log('transition')
+                        },
+                        onLeaveBack: ()=>{
+                            app.emitEvent("keyDown", "Camera-dating-app")
+                            console.log('transition')
+                        }
+                    }
+                })
+
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "#showcase-1",
+                        start: "top center",
+                        end: "bottom top",
+                        onEnter: ()=>{
+                            app.emitEvent("mouseUp", "Camera-dating-app")
+                            console.log('showcase on')
+                        },
+                        onLeaveBack: ()=>{
+                            app.emitEvent("mouseDown", "Camera-dating-app")
+                            console.log('showcase off')
+                        }
+                    }
+                })
+
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "#showcase-2",
+                        start: "top center",
+                        end: "bottom top",
+                        onEnter: ()=>{
+                            app.emitEvent("mouseDown", "phone 2")
+                        },
+                        onLeaveBack: ()=>{
+                            app.emitEvent("mouseUp", "phone 2")
+                        }
+                    }
+                })
+
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "#cta-2",
+                        //start: "top center",
+                        //end: "bottom top",
+                        onEnter: ()=>{
+                            console.log('cta-2')
+                            app.emitEvent("keyDown", "phone 2")
+                        },
+                        onLeaveBack: ()=>{
+                            app.emitEvent("mouseDown", "phone 2")
                         }
                     }
                 })

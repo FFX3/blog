@@ -4,6 +4,6 @@ import { build, defineConfig } from 'vite';
 export default defineConfig({
 	plugins: [sveltekit()],
     build: {
-        minify: false
+        minify: false // minification is causing odd bugs on IOS
     }
 });

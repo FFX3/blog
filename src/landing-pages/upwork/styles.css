@@ -58,6 +58,7 @@ main > * {
 }
 
 .phone-space {
+    display: flex;
     background-color: none;
     width: 750px;
     height: 750px;
@@ -249,6 +250,19 @@ main > * {
     border-radius: 3px;
 }
 
+#showcase-1, #showcase-2, #showcase-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-content: center;
+    justify-items: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.mobile {
+    display: none;
+}
+
 @-webkit-keyframes play {
     0% {
         background-position: 0px;
@@ -299,6 +313,12 @@ main > * {
 
 
 @media (max-width: 1260px) {
+    .mobile {
+        display: unset;
+    }
+    .desktop {
+        display: none;
+    }
 
     #canvas-container {
         position: fixed;
