@@ -4,14 +4,15 @@
     import './styles.css'
     import { page } from '$app/stores'
 
-
-    const referredBy = $page.url.searchParams.get('referredBy')
+    let ctaUrl = `https://calendly.com/justin_mcintyre/30min`
 
     onMount(()=>{
+        const matches = /referredBy=([^&#=]*)/.exec(window.location.search);
+        const referredBy = matches?.pop();
+        ctaUrl = `https://calendly.com/justin_mcintyre/30min?a2=${referredBy}`
         run()
     })
 
-    const ctaUrl = `https://calendly.com/justin_mcintyre/30min?a2=${referredBy}`
     
 </script>
 
